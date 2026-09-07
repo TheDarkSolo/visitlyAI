@@ -93,7 +93,14 @@ public class ConversationOrchestrator {
         broadcastMessage(conversation, botMessage);
         broadcastSummary(conversation);
 
-        channelAdapterRegistry.get(channel).sendMessage(externalThreadId, reply);
+        try {
+            channelAdapterRegistry.get(channel).sendMessage(externalThreadId, reply);
+        } catch (Exception e) {
+            // The conversation/message state above must survive even if outbound delivery
+            // fails (e.g. a transient WhatsApp/Instagram API error) — a manager can still
+            // see what the bot said and follow up manually.
+            log.error("Failed to deliver reply for conversation {}", conversation.getId(), e);
+        }
     }
 
     private Conversation createConversation(Channel channel, String externalThreadId, String senderDisplayName) {

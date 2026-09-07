@@ -13,6 +13,7 @@ import com.doorfox.repository.MessageRepository;
 import com.doorfox.service.ConversationMapper;
 import com.doorfox.service.channel.ChannelAdapterRegistry;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,6 +24,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/conversations")
 public class ConversationController {
@@ -102,8 +104,14 @@ public class ConversationController {
         MessageResponse response = ConversationMapper.toMessageResponse(message);
         messagingTemplate.convertAndSend("/topic/conversations/" + conversation.getId(), response);
 
-        channelAdapterRegistry.get(conversation.getChannel())
-                .sendMessage(conversation.getExternalThreadId(), request.text());
+        try {
+            channelAdapterRegistry.get(conversation.getChannel())
+                    .sendMessage(conversation.getExternalThreadId(), request.text());
+        } catch (Exception e) {
+            // The manager's message must stay recorded in the CRM even if outbound delivery
+            // fails — losing it here would silently roll back the whole transaction.
+            log.error("Failed to deliver manager reply for conversation {}", conversation.getId(), e);
+        }
 
         return response;
     }
