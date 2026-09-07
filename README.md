@@ -48,8 +48,8 @@
 Проект рассчитан на локальный запуск (пока без выкладки на сервер).
 
 ```bash
-git clone https://github.com/TheDarkSolo/visitly.git
-cd visitly
+git clone https://github.com/TheDarkSolo/visitlyAI.git
+cd visitlyAI
 cp .env.example .env
 ```
 
