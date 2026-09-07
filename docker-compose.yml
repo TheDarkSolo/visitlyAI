@@ -1,4 +1,4 @@
-name: doorfox
+name: visitly
 
 services:
   postgres:

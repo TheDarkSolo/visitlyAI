@@ -11,11 +11,11 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.doorfox</groupId>
-    <artifactId>doorfox-backend</artifactId>
+    <groupId>com.visitly</groupId>
+    <artifactId>visitly-backend</artifactId>
     <version>0.1.0</version>
-    <name>doorfox-backend</name>
-    <description>Doorfox — AI SDR that qualifies WhatsApp/Instagram leads and books them into the office</description>
+    <name>visitly-backend</name>
+    <description>Visitly — AI SDR that qualifies WhatsApp/Instagram leads and books them into the office</description>
 
     <properties>
         <java.version>21</java.version>

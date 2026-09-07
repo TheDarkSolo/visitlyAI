@@ -30,7 +30,7 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-100">
       <form onSubmit={onSubmit} className="bg-white p-8 rounded-lg shadow-md w-80 space-y-4">
-        <h1 className="text-xl font-semibold text-slate-800">Вход в Doorfox</h1>
+        <h1 className="text-xl font-semibold text-slate-800">Вход в Visitly</h1>
         <input
           className="w-full border rounded px-3 py-2"
           type="email"

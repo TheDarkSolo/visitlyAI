@@ -47,4 +47,4 @@ instagram:
 
 logging:
   level:
-    com.doorfox: ${APP_LOG_LEVEL:INFO}
+    com.visitly: ${APP_LOG_LEVEL:INFO}
