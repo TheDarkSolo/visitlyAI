@@ -33,6 +33,9 @@ public class Booking {
     @Column(name = "google_event_id")
     private String googleEventId;
 
+    @Column(columnDefinition = "TEXT")
+    private String notes;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private BookingStatus status = BookingStatus.PENDING;
