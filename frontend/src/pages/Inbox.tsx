@@ -6,9 +6,11 @@ import { createStompClient } from "../lib/ws";
 import { ConversationSummary, MessageResponse } from "../lib/types";
 import ConversationList from "../components/ConversationList";
 import MessageThread from "../components/MessageThread";
+import AppShell from "../components/AppShell";
+import { BotIcon, UsersIcon } from "../components/icons";
 
 export default function Inbox() {
-  const { token, logout } = useAuth();
+  const { token } = useAuth();
   const queryClient = useQueryClient();
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [draft, setDraft] = useState("");
@@ -86,53 +88,63 @@ export default function Inbox() {
   };
 
   return (
-    <div className="h-screen flex flex-col">
-      <header className="flex justify-between items-center px-4 py-2 border-b bg-white">
-        <h1 className="font-semibold text-slate-800">Inbox</h1>
-        <button onClick={logout} className="text-sm text-slate-500">
-          Выйти
-        </button>
-      </header>
-      <div className="flex flex-1 overflow-hidden">
+    <AppShell title="Инбокс" fullBleed>
+      <div className="h-full flex">
         <ConversationList conversations={conversations} selectedId={selectedId} onSelect={setSelectedId} />
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col min-w-0">
           {selected ? (
             <>
-              <div className="flex justify-between items-center px-4 py-2 border-b bg-white">
-                <span className="text-sm text-slate-600">
+              <div className="flex justify-between items-center px-6 py-3 border-b border-ink-900/6 bg-white">
+                <span className="inline-flex items-center gap-2 text-sm text-ink-600">
+                  {selected.ownerType === "BOT" ? (
+                    <BotIcon className="w-4 h-4 text-brand-600" />
+                  ) : (
+                    <UsersIcon className="w-4 h-4 text-ink-500" />
+                  )}
                   {selected.ownerType === "BOT" ? "Бот отвечает автоматически" : "Диалог у менеджера"}
                 </span>
                 {selected.ownerType === "BOT" ? (
-                  <button onClick={takeover} className="text-sm bg-slate-800 text-white px-3 py-1 rounded">
+                  <button
+                    onClick={takeover}
+                    className="text-xs font-semibold bg-ink-900 text-white px-4 py-2 rounded-full hover:bg-ink-800 transition-colors"
+                  >
                     Перехватить
                   </button>
                 ) : (
-                  <button onClick={release} className="text-sm bg-slate-200 px-3 py-1 rounded">
+                  <button
+                    onClick={release}
+                    className="text-xs font-semibold bg-cream-100 text-ink-700 px-4 py-2 rounded-full hover:bg-cream-200 transition-colors"
+                  >
                     Вернуть боту
                   </button>
                 )}
               </div>
               <MessageThread messages={messages} />
               {selected.ownerType === "MANAGER" && (
-                <div className="p-3 border-t bg-white flex gap-2">
+                <div className="p-4 border-t border-ink-900/6 bg-white flex gap-2">
                   <input
-                    className="flex-1 border rounded px-3 py-2"
+                    className="flex-1 rounded-xl border border-ink-900/10 px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-brand-400/60 focus:border-brand-400"
                     value={draft}
                     onChange={(e) => setDraft(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && send()}
                     placeholder="Написать клиенту..."
                   />
-                  <button onClick={send} className="bg-slate-800 text-white px-4 rounded">
+                  <button
+                    onClick={send}
+                    className="bg-brand-gradient text-white text-sm font-semibold px-5 rounded-xl hover:opacity-90 transition-opacity"
+                  >
                     Отправить
                   </button>
                 </div>
               )}
             </>
           ) : (
-            <div className="flex-1 flex items-center justify-center text-slate-400">Выберите диалог слева</div>
+            <div className="flex-1 flex items-center justify-center text-sm text-ink-400 bg-cream-50">
+              Выберите диалог слева
+            </div>
           )}
         </div>
       </div>
-    </div>
+    </AppShell>
   );
 }

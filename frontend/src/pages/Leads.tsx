@@ -1,16 +1,9 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "../lib/api";
 import { FunnelStage, LeadResponse } from "../lib/types";
+import { STAGES, STAGE_LABELS } from "../lib/funnel";
 import LeadCard from "../components/LeadCard";
-
-const STAGES: FunnelStage[] = ["CONTACTED", "QUALIFIED", "BOOKED", "VISITED", "SOLD"];
-const STAGE_LABELS: Record<FunnelStage, string> = {
-  CONTACTED: "Обращение",
-  QUALIFIED: "Квалифицирован",
-  BOOKED: "Записан",
-  VISITED: "Пришёл",
-  SOLD: "Сделка",
-};
+import AppShell from "../components/AppShell";
 
 export default function Leads() {
   const queryClient = useQueryClient();
@@ -25,19 +18,32 @@ export default function Leads() {
   };
 
   return (
-    <div className="h-screen overflow-x-auto p-4 flex gap-4 bg-slate-50">
-      {STAGES.map((stage) => (
-        <div key={stage} className="w-64 flex-shrink-0">
-          <h2 className="font-semibold text-slate-700 mb-2">{STAGE_LABELS[stage]}</h2>
-          <div className="space-y-2">
-            {leads
-              .filter((l) => l.funnelStage === stage)
-              .map((lead) => (
-                <LeadCard key={lead.id} lead={lead} stages={STAGES} onMove={moveStage} />
-              ))}
-          </div>
-        </div>
-      ))}
-    </div>
+    <AppShell title="Лиды" fullBleed>
+      <div className="h-full overflow-x-auto p-6 flex gap-4">
+        {STAGES.map((stage) => {
+          const stageLeads = leads.filter((l) => l.funnelStage === stage);
+          return (
+            <div key={stage} className="w-72 shrink-0 flex flex-col">
+              <div className="flex items-center justify-between mb-3 px-1">
+                <h2 className="font-bold text-sm text-ink-800">{STAGE_LABELS[stage]}</h2>
+                <span className="text-xs font-semibold text-ink-400 bg-white border border-ink-900/6 rounded-full px-2 py-0.5">
+                  {stageLeads.length}
+                </span>
+              </div>
+              <div className="space-y-3 overflow-y-auto pb-4">
+                {stageLeads.map((lead) => (
+                  <LeadCard key={lead.id} lead={lead} stages={STAGES} onMove={moveStage} />
+                ))}
+                {stageLeads.length === 0 && (
+                  <div className="rounded-2xl border border-dashed border-ink-900/10 py-6 text-center text-xs text-ink-300">
+                    Нет лидов
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </AppShell>
   );
 }

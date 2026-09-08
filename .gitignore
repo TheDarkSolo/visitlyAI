@@ -13,6 +13,7 @@ frontend/*.tsbuildinfo
 .idea/
 *.iml
 .vscode/
+.claude/
 
 # OS
 .DS_Store
