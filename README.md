@@ -1,8 +1,6 @@
 <p align="center">
-  <img src="assets/logo.svg?v=2" width="120" alt="Visitly logo">
+  <img src="assets/logo.svg?v=3" width="280" alt="Visitly">
 </p>
-
-<h1 align="center">Visitly</h1>
 
 <p align="center">AI SDR, который квалифицирует лиды из WhatsApp/Instagram и доводит их до визита в офис.</p>
 

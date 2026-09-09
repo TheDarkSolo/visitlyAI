@@ -1,17 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
-  <defs>
-    <linearGradient id="badge" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#F6A94D"/>
-      <stop offset="1" stop-color="#C0430F"/>
-    </linearGradient>
-  </defs>
-
-  <!-- badge background -->
-  <rect width="200" height="200" rx="40" fill="url(#badge)"/>
-
-  <!-- fox-tail mark, centered -->
-  <g transform="translate(42,10) scale(0.8)">
-    <path d="M62,168 C24,168 22,112 62,86 C88,69 118,66 132,38 C142,62 126,84 104,102 C82,120 66,140 62,168 Z" fill="#262A33"/>
-    <path d="M132,38 C142,62 126,84 104,102 C112,80 122,58 132,38 Z" fill="#FBEEDD"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 120" width="420" height="120">
+  <g transform="translate(28 12) scale(0.96)">
+    <path d="M50 96 L24.2 60.95 A32 32 0 1 1 75.8 60.95 Z" fill="#4D6BFE"/>
+    <circle cx="50" cy="42" r="11.5" fill="#ffffff"/>
   </g>
+  <text x="150" y="79" font-family="Space Grotesk, Helvetica Neue, Helvetica, Arial, sans-serif" font-size="62" font-weight="600" letter-spacing="-1.9" fill="#16171c">Visitly</text>
 </svg>
