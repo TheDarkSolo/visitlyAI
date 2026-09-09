@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Inbox from "./pages/Inbox";
 import Leads from "./pages/Leads";
+import Bookings from "./pages/Bookings";
 
 function Protected({ children }: { children: ReactElement }) {
   const { token } = useAuth();
@@ -38,6 +39,14 @@ export default function App() {
         element={
           <Protected>
             <Leads />
+          </Protected>
+        }
+      />
+      <Route
+        path="/bookings"
+        element={
+          <Protected>
+            <Bookings />
           </Protected>
         }
       />

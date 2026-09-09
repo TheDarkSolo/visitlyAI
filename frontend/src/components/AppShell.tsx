@@ -2,12 +2,13 @@ import { ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../lib/auth";
 import Logo from "./Logo";
-import { ChartIcon, InboxIcon, KanbanIcon, LogOutIcon } from "./icons";
+import { CalendarIcon, ChartIcon, InboxIcon, KanbanIcon, LogOutIcon } from "./icons";
 
 const NAV = [
   { to: "/dashboard", label: "Дашборд", icon: ChartIcon },
   { to: "/inbox", label: "Инбокс", icon: InboxIcon },
   { to: "/leads", label: "Лиды", icon: KanbanIcon },
+  { to: "/bookings", label: "Записи", icon: CalendarIcon },
 ];
 
 interface AppShellProps {
