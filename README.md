@@ -71,11 +71,11 @@ docker compose up --build -d
 - Фронтенд (CRM): [http://localhost:8081](http://localhost:8081)
 - Backend API: [http://localhost:8090](http://localhost:8090)
 
-Вход в CRM — сидовый аккаунт из миграции `V1__init.sql`:
+Вход в CRM — сидовый аккаунт из миграций `V1__init.sql`/`V2__admin_credentials.sql`:
 
 ```
-Email:    admin@studio.local
-Пароль:   ChangeMe123!
+Логин:  admin
+Пароль: admin
 ```
 
 **Обязательно смените этот пароль сразу после первого входа** — хеш пароля закоммичен в репозиторий (он публичный для любого, у кого есть доступ к коду), так что дефолтный пароль нельзя считать секретом.
